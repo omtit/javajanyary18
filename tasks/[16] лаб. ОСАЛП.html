@@ -1,0 +1,305 @@
+<!DOCTYPE html>  <html>  <head>  <meta charset="utf-8"/>  <title>16 HTTP клиент</title>  <style>
+.check_single {
+    margin:15px;
+	border:1px solid black;
+	padding:5px;
+    width:calc(100% - 40px);
+}
+sqrt val {
+	border-top: 1px solid black;
+}
+sqrt:before {
+	content:"\221A";
+}
+.section {
+	counter-reset:section;
+}
+.section h3:after {
+	counter-increment:section;
+	content: " " counter(section);
+}
+table {
+	border-collapse:collapse;
+}
+.check_values {
+	width:100%;
+	counter-reset:test_case;
+}
+.check_values td:first-child::before {
+	counter-increment:test_case;
+	content: counter(test_case);
+}
+table td, table th {
+	border:1px solid black;
+	text-align:center;
+}
+.check_values td:first-child{
+	width:40px;
+}
+.lab_nav ol {
+	list-style:none;
+}
+.nav {
+	position:fixed;
+	top:0px;
+	right:0px;
+	margin:15px;
+	clear:both;
+}
+.nav ul{
+	list-style-type:none;
+	padding:0px;
+	float:left;
+}
+.nav li {
+	margin:2px;
+	border:1px solid black;
+}
+.nav li a {
+	display:block;
+	padding:7px;
+}
+.task_block {
+	width:80%;
+	page-break-inside:avoid;
+	padding:10px;
+	display:block;
+}
+.task_block:target{
+	background-color:lightgrey;
+}
+.task_block:target .task_id{
+	color:white;
+}
+.task_id {
+	float:right;
+	color:lightgrey;
+}
+.quiz_block {
+	width:80%;
+}
+.quiz_block:target{
+	background-color:lightgrey;
+}
+.task_desc {
+	margin:5px;
+}
+.example_image {
+	width:200px;
+}
+.lab_nav {
+	width:80%;
+	overflow:auto;
+}
+.check_values .preformatted, .preformatted {
+	font-family:monospace;
+	white-space:pre;
+	text-align:left;
+	padding:10px;
+}
+formula {
+	font-weight:bold;
+	text-align:center;
+	vertical-align:middle;
+}
+fraction {
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	font-weight:bold;
+}
+numerator {
+	display:block;
+	border-bottom:2px solid black;
+}
+denominator {
+	display:block;
+}
+.example::after{
+	content:"*";
+}
+.supervision::after{
+	content:"!";
+}
+spoiler {
+	color:darkgrey;
+}
+spoiler origin {
+	display:none;
+}
+spoiler:hover origin {
+	display:inline;
+}
+spoiler trans {
+	display:inline;
+}
+spoiler:hover trans {
+	display:none;
+}
+.comment{
+	color:darkgrey;
+}
+.step{
+	display:none;
+}
+.step:last-child, .step:target{
+	display:block;
+}
+.step:target ~ .step:last-child{
+	display:none;
+}
+.console{
+	background-color:black;
+	color:white;
+	width:300px;
+}
+zoom{
+	background-color:gray;
+	font-size:40pt;
+}
+@media print {
+	.nav {
+		display:none;
+	}
+	.lab_nav {
+		display:none;
+	}
+	ol li {
+		margin-bottom:30px;
+	}
+	.quiz_block {
+		width:100%;
+	}
+	.hide_on_print .check_values, .hide_on_print .check_single{
+		display:none;
+	}
+	.hide_on_print img{
+		display:none;
+	}
+	.empty_on_print td{
+		color:transparent;
+	}
+	.empty_on_print img{
+		visibility:hidden;
+	}
+}</style>  </head>  <body class="section">  <a name="heading"><h1>HTTP клиент</h1></a>
+<div class="lab_nav">
+	Другие темы:
+	<ol>
+		<li>1. <a href="[1] лаб. ОСАЛП.html">Ввод и вывод информации</a></li>
+		<li>2. <a href="[2] лаб. ОСАЛП.html">Арифметические операторы и методы</a></li>
+		<li>5. <a href="[5] лаб. ОСАЛП.html">Условия</a></li>
+		<li>6. <a href="[6] лаб. ОСАЛП.html">Циклы</a></li>
+		<li>7. <a href="[7] лаб. ОСАЛП.html">Массивы</a></li>
+		<li>8. <a href="[8] лаб. ОСАЛП.html">Строки</a></li>
+		<li>9. <a href="[9] лаб. ОСАЛП.html">Чтение файлов</a></li>
+		<li>10. <a href="[10] лаб. ОСАЛП.html">Запись в файлы</a></li>
+		<li>12. <a href="[12] лаб. ОСАЛП.html">Методы</a></li>
+		<li>13. <a href="[13] лаб. ОСАЛП.html">Исключения</a></li>
+		<li>14. <a href="[14] лаб. ОСАЛП.html">Классы и объекты</a></li>
+		<li>15. <a href="[15] лаб. ОСАЛП.html">Коллекции</a></li>
+		<li>16. <a href="[16] лаб. ОСАЛП.html">HTTP клиент</a></li>
+	</ol>
+</div><div class="nav">  <ul>  <li><a href="#heading">^</a></li>  <li><a href="#info1">справка</a></li>  <li><a href="#task4304">№ 1</a></li>  <li><a href="#task2070">№ 2</a></li>  <li><a href="#task7693">№ 3</a></li>  <li><a href="#task8718">№ 4</a></li>  <li><a href="#task7248">№ 5</a></li>  </ul>  </div>
+<div class="task_block" id="info1">
+	<h3>Справочная информация</h3>
+	<p>Для выполнения лабораторной работы нужно установить локальный веб-сервер XAMPP <a href="https://www.apachefriends.org/ru/download.html" target="_blank">источник (в новой вкладке)</a>.
+	По умолчанию при установке будет создана папка "C://xampp". В ней должна находиться папка "htdocs". В нее нужно поместить файлы из папки "handlers", которая находится рядом с заданиями.</p>
+	<p>Адрес сервера по умолчанию это "localhost". Стандартный порт для подключения "80". Может также быть "8080". Он отображается в XAMPP Control Panel. Для каждой задачи на сервере существует свой обработчик, который назван "handlerXXXX.php", где XXXX - кодовый номер задачи.</p>
+</div><div class="section">
+<div id="task4304" class="task_block">
+	<div class="task_id">4304</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Сгенерировать 2000 случайных чисел в промежутке от -1500 до 1500. Числа не должны повторяться. Склеить их в строку через ";" и отправить AJAX POST-запросом на сервер. Отобразить ответ сервера (сумму чисел).</div>
+</div><div id="task2070" class="task_block">
+	<div class="task_id">2070</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Случайным образом сгенерировать 1000 чисел, которые не вызовут ошибку при решении задачи <a href="[2] лаб. ОСАЛП.html#task5201" target="_blank">5201 (открыть в отдельной вкладке)</a>. Числа не должны повторяться. Склеить их в строку через ";" и отправить AJAX POST-запросом на сервер. Отобразить ответ сервера (результаты расчетов).</div>
+</div><div id="task7693" class="task_block">
+	<div class="task_id">7693</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Случайным образом сгенерировать 1000 пар чисел, которые не вызовут ошибку при решении задачи <a href="[2] лаб. ОСАЛП.html#task3943" target="_blank">3943 (открыть в отдельной вкладке)</a>. Данные нужно сгруппировать в виде массива JSON объектов и отправить AJAX POST-запросом на сервер. Отобразить ответ сервера (результаты расчетов).</div>
+	<div class="check_single preformatted">Пример данных в запросе:
+{"data":[
+    {"x":-5,"y":81},
+    {"x":7507,"y":7499}
+]}</div>
+<div class="check_single preformatted">Пример данных в ответе:
+{"data":[
+    {"x":-5,"y":81,"r":-10},
+    {"x":7507,"y":7499,"r":-435.7062}
+]}</div>
+</div><div id="task8718" class="task_block">
+	<div class="task_id">8718</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Случайным образом сгенерировать для задачи <a href="[5] лаб. ОСАЛП.html#task6556" target="_blank">6556 (открыть в отдельной вкладке)</a>: 200 групп чисел для результата "Размещение возможно", 200 групп для результата "Размещение невозможно" и по 50 групп для каждого случая ошибки. Данные нужно сгруппировать в виде массива JSON объектов и отправить AJAX POST-запросом на сервер. Отобразить ответ сервера (результаты расчетов).</div>
+	<div class="check_single preformatted">Пример данных в запросе:
+{"possible":[
+    {"a":3,"b":5,"c":7,"d":9}
+  ],
+  "impossible":[
+    {"a":13,"b":11,"c":7,"d":19},
+    {"a":23,"b":3,"c":9,"d":11}
+  ],
+  "error_group_a":[
+    {"a":-2,"b":8,"c":9,"d":7}
+  ],
+  "error_group_b":[
+    {"a":3,"b":-4,"c":5,"d":6}
+  ],
+  "error_group_c":[
+    {"a":13,"b":15,"c":-17,"d":19}
+  ],
+  "error_group_d":[
+    {"a":6911,"b":5881,"c":3203,"d":-4639}
+]}</div>
+<div class="check_single preformatted">Пример данных в ответе:
+{"possible":[
+    {"a":3,"b":5,"c":7,"d":9,"r":"Размещение возможно"}
+  ],
+  "impossible":[
+    {"a":13,"b":11,"c":7,"d":19,"r":"Размещение невозможно"},
+    {"a":23,"b":3,"c":9,"d":11,"r":"Размещение невозможно"}
+  ],
+  "error_group_a":[
+    {"a":-2,"b":8,"c":9,"d":7,"r":"Значение a должно быть неотрицательным"}
+  ],
+  "error_group_b":[
+    {"a":3,"b":-4,"c":5,"d":6,"r":"Значение b должно быть неотрицательным"}
+  ],
+  "error_group_c":[
+    {"a":13,"b":15,"c":-17,"d":19,"r":"Значение c должно быть неотрицательным"}
+  ],
+  "error_group_d":[
+    {"a":6911,"b":5881,"c":3203,"d":-4639,"r":"Значение d должно быть неотрицательным"}
+]}
+</div>
+</div><div id="task7248" class="task_block">
+	<div class="task_id">7248</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Случайным образом сгенерировать тестовые данные для задачи <a href="[5] лаб. ОСАЛП.html#task1217" target="_blank">1217 (открыть в отдельной вкладке)</a>: По 150 групп чисел для каждого класса эквивалентности результатов и по 100 групп для каждого случая ошибки. Данные нужно сгруппировать в виде массива JSON объектов и отправить AJAX POST-запросом на сервер. Отобразить ответ сервера (результаты расчетов).</div>
+	<div class="check_single preformatted">Пример данных в запросе:
+{"pairs":[
+    {"first":{"a":2, "b":3},  "second":{"a":5,  "b":7}},
+    {"first":{"a":11,"b":17}, "second":{"a":13, "b":19}},
+    {"first":{"a":23,"b":37}, "second":{"a":29, "b":31}},
+    {"first":{"a":43,"b":53}, "second":{"a":41, "b":47}},
+    {"first":{"a":5, "b":15}, "second":{"a":0,  "b":30}},
+    {"first":{"a":67,"b":71}, "second":{"a":59, "b":61}},
+    {"first":{"a":79,"b":73}, "second":{"a":83, "b":89}},
+    {"first":{"a":97,"b":101},"second":{"a":107,"b":103}}
+]}</div>
+<div class="check_single preformatted">Пример данных в ответе:
+{"pairs":[
+    {"first":{"a":2, "b":3},  "second":{"a":5,  "b":7}, "r":"Не пересекаются"},
+    {"first":{"a":11,"b":17}, "second":{"a":13, "b":19},"r":{"a":13,"b":17}},
+    {"first":{"a":23,"b":37}, "second":{"a":29, "b":31},"r":{"a":29,"b":31}},
+    {"first":{"a":43,"b":53}, "second":{"a":41, "b":47},"r":{"a":43,"b":47}},
+    {"first":{"a":5, "b":15}, "second":{"a":0,  "b":30},"r":{"a":5,"b":15}},
+    {"first":{"a":67,"b":71}, "second":{"a":59, "b":61},"r":"Не пересекаются"},
+    {"first":{"a":79,"b":73}, "second":{"a":83, "b":89},"r":"Значение A должно быть меньше значения B"},
+    {"first":{"a":97,"b":101},"second":{"a":107,"b":103},"r":"Значение A должно быть меньше значения B"}
+]}
+</div>
+</div></div>
+</body>  </html>

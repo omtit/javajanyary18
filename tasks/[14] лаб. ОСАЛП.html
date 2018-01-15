@@ -1,0 +1,1507 @@
+<!DOCTYPE html>  <html>  <head>  <meta charset="utf-8"/>  <title>14 Классы и объекты</title>  <style>
+.check_single {
+    margin:15px;
+	border:1px solid black;
+	padding:5px;
+    width:calc(100% - 40px);
+}
+sqrt val {
+	border-top: 1px solid black;
+}
+sqrt:before {
+	content:"\221A";
+}
+.section {
+	counter-reset:section;
+}
+.section h3:after {
+	counter-increment:section;
+	content: " " counter(section);
+}
+table {
+	border-collapse:collapse;
+}
+.check_values {
+	width:100%;
+	counter-reset:test_case;
+}
+.check_values td:first-child::before {
+	counter-increment:test_case;
+	content: counter(test_case);
+}
+table td, table th {
+	border:1px solid black;
+	text-align:center;
+}
+.check_values td:first-child{
+	width:40px;
+}
+.lab_nav ol {
+	list-style:none;
+}
+.nav {
+	position:fixed;
+	top:0px;
+	right:0px;
+	margin:15px;
+	clear:both;
+}
+.nav ul{
+	list-style-type:none;
+	padding:0px;
+	float:left;
+}
+.nav li {
+	margin:2px;
+	border:1px solid black;
+}
+.nav li a {
+	display:block;
+	padding:7px;
+}
+.task_block {
+	width:80%;
+	page-break-inside:avoid;
+	padding:10px;
+	display:block;
+}
+.task_block:target{
+	background-color:lightgrey;
+}
+.task_block:target .task_id{
+	color:white;
+}
+.task_id {
+	float:right;
+	color:lightgrey;
+}
+.quiz_block {
+	width:80%;
+}
+.quiz_block:target{
+	background-color:lightgrey;
+}
+.task_desc {
+	margin:5px;
+}
+.example_image {
+	width:200px;
+}
+.lab_nav {
+	width:80%;
+	overflow:auto;
+}
+.check_values .preformatted, .preformatted {
+	font-family:monospace;
+	white-space:pre;
+	text-align:left;
+	padding:10px;
+}
+formula {
+	font-weight:bold;
+	text-align:center;
+	vertical-align:middle;
+}
+fraction {
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	font-weight:bold;
+}
+numerator {
+	display:block;
+	border-bottom:2px solid black;
+}
+denominator {
+	display:block;
+}
+.example::after{
+	content:"*";
+}
+.supervision::after{
+	content:"!";
+}
+spoiler {
+	color:darkgrey;
+}
+spoiler origin {
+	display:none;
+}
+spoiler:hover origin {
+	display:inline;
+}
+spoiler trans {
+	display:inline;
+}
+spoiler:hover trans {
+	display:none;
+}
+.comment{
+	color:darkgrey;
+}
+.step{
+	display:none;
+}
+.step:last-child, .step:target{
+	display:block;
+}
+.step:target ~ .step:last-child{
+	display:none;
+}
+.console{
+	background-color:black;
+	color:white;
+	width:300px;
+}
+zoom{
+	background-color:gray;
+	font-size:40pt;
+}
+@media print {
+	.nav {
+		display:none;
+	}
+	.lab_nav {
+		display:none;
+	}
+	ol li {
+		margin-bottom:30px;
+	}
+	.quiz_block {
+		width:100%;
+	}
+	.hide_on_print .check_values, .hide_on_print .check_single{
+		display:none;
+	}
+	.hide_on_print img{
+		display:none;
+	}
+	.empty_on_print td{
+		color:transparent;
+	}
+	.empty_on_print img{
+		visibility:hidden;
+	}
+}</style>  </head>  <body class="section">  <a name="heading"><h1>Классы и объекты</h1></a>
+<div class="lab_nav">
+	Другие темы:
+	<ol>
+		<li>1. <a href="[1] лаб. ОСАЛП.html">Ввод и вывод информации</a></li>
+		<li>2. <a href="[2] лаб. ОСАЛП.html">Арифметические операторы и методы</a></li>
+		<li>5. <a href="[5] лаб. ОСАЛП.html">Условия</a></li>
+		<li>6. <a href="[6] лаб. ОСАЛП.html">Циклы</a></li>
+		<li>7. <a href="[7] лаб. ОСАЛП.html">Массивы</a></li>
+		<li>8. <a href="[8] лаб. ОСАЛП.html">Строки</a></li>
+		<li>9. <a href="[9] лаб. ОСАЛП.html">Чтение файлов</a></li>
+		<li>10. <a href="[10] лаб. ОСАЛП.html">Запись в файлы</a></li>
+		<li>12. <a href="[12] лаб. ОСАЛП.html">Методы</a></li>
+		<li>13. <a href="[13] лаб. ОСАЛП.html">Исключения</a></li>
+		<li>14. <a href="[14] лаб. ОСАЛП.html">Классы и объекты</a></li>
+		<li>15. <a href="[15] лаб. ОСАЛП.html">Коллекции</a></li>
+		<li>16. <a href="[16] лаб. ОСАЛП.html">HTTP клиент</a></li>
+	</ol>
+</div><div class="nav">  <ul>  <li><a href="#heading">^</a></li>  <li><a href="#task8403" class="example">№ 1</a></li>  <li><a href="#task3185" class="supervision">№ 2</a></li>  <li><a href="#task9914">№ 3</a></li>  <li><a href="#task6011" class="example">№ 4</a></li>  <li><a href="#task6037">№ 5</a></li>  <li><a href="#task2809" class="supervision">№ 6</a></li>  <li><a href="#task7297">№ 7</a></li>  <li><a href="#task5242">№ 8</a></li>  <li><a href="#task1379">№ 9</a></li>  <li><a href="#task2401">№ 10</a></li>  <li><a href="#task5421">№ 11</a></li>  <li><a href="#task9713">№ 12</a></li>  <li><a href="#task7301" class="example">№ 13</a></li>  <li><a href="#task2000">№ 14</a></li>  <li><a href="#task5449" class="example">№ 15</a></li>  <li><a href="#task2662">№ 16</a></li>  <li><a href="#task4147">№ 17</a></li>  <li><a href="#task1953">№ 18</a></li>  <li><a href="#task3956">№ 19</a></li>  </ul>  <ul>  <li><a href="#task5032" class="example">№ 20</a></li>  <li><a href="#task3567">№ 21</a></li>  <li><a href="#task5108">№ 22</a></li>  <li><a href="#task2033">№ 23</a></li>  <li><a href="#task6981">№ 24</a></li>  <li><a href="#task1753">№ 25</a></li>  </ul>  </div>
+<div class="task_block" id="task8403">
+	<div class="task_id">8403</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Реализовать класс Point так, чтобы при выполнении данного сценария на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">5.0</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">0.0</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">12.8062</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">10.0</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task3185">
+	<div class="task_id">3185</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Point так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">5.0</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">0.0</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">12.8062</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">10.0</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Конечная точка не инициализирована</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task9914">
+	<div class="task_id">9914</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не пересекаются</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Пересекаются</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">true</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">false</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Некорректный интервал</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Данный интервал не инициализирован</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task6011">
+	<div class="task_id">6011</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Point так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">25.4558</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">10.1980</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Начальная точка не инициализирована</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Конечная точка не инициализирована</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Начальная точка не инициализирована</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task6037">
+	<div class="task_id">6037</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не пересекаются</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Пересекаются</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task2809">
+	<div class="task_id">2809</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Point так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(127;113)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(31;37)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(5;7)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (23;29) и (0;0) составляет 37,0135</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (11;13) и (0;0) составляет 8,4853</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task7297">
+	<div class="task_id">7297</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не содержит</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Содержит</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">false</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task5242">
+	<div class="task_id">5242</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">[23;29]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task1379">
+	<div class="task_id">1379</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+[12;18]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+[13;25]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+Корректность интервала была нарушена</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task2401">
+	<div class="task_id">2401</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+[31;35]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Невозможно уменьшить интервал на указанную длину</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Корректность интервала была нарушена</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+Корректность интервала была нарушена</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task5421">
+	<div class="task_id">5421</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Point так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(31;37)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(5;7)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (23;29) и (0;0) составляет 37.0135</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (11;13) и (17;19) составляет 8.4853</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task9713">
+	<div class="task_id">9713</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дополнить класс Interval так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">[829;857]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">[593;607]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал [0;15] пересекается с интервалом [10;20]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал [100;200] не пересекается с интервалом [Некорректный интервал 400;300]</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task7301">
+	<div class="task_id">7301</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Реализовать параметризованный конструктор класса Point так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">(53;59)</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (53;59) и (61;67) составляет 11.3137</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">17.2047</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Расстояние между (71;73) и (0;0) составляет 101.8332</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">17.2047</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">15.6205</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">14.4222</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task2000">
+	<div class="task_id">2000</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Реализовать параметризованный конструктор класса Interval так, чтобы при выполнении данных сценарев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал инициализирован
+[23;29]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Некорректный интервал</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал инициализирован
+Интервал успешно изменен
+[12;18]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Некорректный интервал</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Невозможно уменьшить интервал на указанную длину</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Интервал успешно изменен
+[13;110]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Длина интервала: 138
+Интервал успешно изменен
+Длина интервала: 97
+[13;110]</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task5449">
+	<div class="task_id">5449</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Реализовать класс Point так, чтобы при выполнении сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не равны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Равны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Эквивалентны</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task2662">
+	<div class="task_id">2662</div>
+	<h3>Задача</h3>
+	<div class="task_desc">Реализовать класс Interval так, чтобы при выполнении сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Равны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не равны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не эквивалентны</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не эквивалентны</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task4147">
+	<div class="task_id">4147</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Реализовать класс Rectangle так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не содержит</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Содержит</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">400</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">225</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Не пересекаются</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">Пересекаются</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task1953">
+	<div class="task_id">1953</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Реализовать класс Circle так, чтобы при выполнении данных сценариев на экран был выведен указанный результат.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер по порядку</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">&lt;circle cx="100" cy="200" r="50"/&gt;</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">530.9292</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">[83;117]
+[103;137]</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td class="preformatted">[69;131]
+[89;151]</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task3956">
+    <div class="task_id">3956</div>
+    <h3>Задача</h3>
+    <div class="task_desc">Реализовать класс Shape так, чтобы при выполнении данного сценария на экран был выведен указанный результат.</div>
+    <table class="check_values">
+        <tr>
+            <th>Номер по порядку</th>
+            <th>Результат</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="preformatted">(10;10)
+(100;100)
+Различаются</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="preformatted">(10;10)
+(100;100)
+(100;10)
+(100;10)
+Совпадают</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="preformatted">23186.2901</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="preformatted">&lt;rect x='0' y='0' width='10' height='10'
+  stroke='blue' stroke-width='5' fill='red'/&gt;
+&lt;circle cx='50' cy='50' r='40'
+  stroke='green' stroke-width='4' fill='yellow'/&gt;</td>
+        </tr>
+    </table>
+</div><div id="link_c2_p6.1" class="task_block">
+	<div class="check_single">
+	<p>В предыдущих задачах были рассмотрены правила оформления абстрактных типов данных в языке программирования. В одних языках программирования они реализованы как классы, в других - с помощью других механизмов. Более подробно абстрактные типы данных рассмотрены в главе 6.1 части II книги "Совершенный код" <a href="Stiv_Makkonnell_-_Sovershenny_kod_2-e_izdanie.pdf#page=144" target="_blank">(открыть в новой вкладке)</a>.</p>
+	</div>
+</div><div class="task_block" id="task5032">
+	<div class="task_id">5032</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дан прямоугольник с координатами x = 100, y = 100, width = 100, height = 100. Исходный файл содержит список действий над ним в формате CSV (<a href="https://ru.wikipedia.org/wiki/CSV" target="_blank">справка в новой вкладке</a>) с разделителем &quot;;&quot;. Каждое действие описывается на отдельной строчке: наименование и необходимые значения. Нужно посчитать количество обработанных действий, а также получившиеся координаты и размеры прямоугольника. Действия описываются в следующем формате:
+	<ul>
+		<li>Переместить по горизонтали. Наименование shiftX. Значение - целое число, указывает насколько изменится координата прямоугольника по оси Х. Ширина прямоугольника остается прежней.</li>
+		<li>Переместить по вертикали. Наименование shiftY. Значение - целое число, указывает насколько изменится координата прямоугольника по оси Y. Высота прямоугольника остается прежней. </li>
+		<li>Изменить ширину. Наименование stretchX. Значение - целое число, указывает насколько изменится ширина прямоугольника. Координата верхнего-левого угла при этом не меняется.</li>
+		<li>Изменить высоту. Наименование stretchY. Значение - целое число, указывает насколько изменится высота прямоугольника. Координата верхнего-левого угла при этом не меняется.</li>
+	</ul><!--{"x":100,"y":100,"w":100,"h":100}--->
+	При попытке совершить некорректное действие, вывести количество корректных действий, сообщение об ошибке и прекратить обработку. Ответ вывести в html-файл. Ответ должен содержать количество действий, описание ошибки и два прямоугольника: красный показывает исходное состояние прямоугольника, черный - последнее корректное состояние.
+	</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='113' y='100' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='117' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='100' width='119' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='100' width='100' height='123' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 5</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='120' y='120' width='110' height='150' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Ошибка: Координата Y должна быть неотрицательной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='110' y='80' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test7.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 11</p><p>Ошибка: Координата X должна быть неотрицательной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='10' y='80' width='100' height='120' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test8.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 8</p><p>Ошибка: Высота должна быть положительной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='130' y='120' width='50' height='60' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test9.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Ошибка: Ширина должна быть положительной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='120' width='110' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test10.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 80</p><p>Результат:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='66' y='183' width='388' height='159' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test11.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test12.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 3</p><p>Ошибка: Некорректное действие: stretchH</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='100' width='80' height='120' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test13.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 4</p><p>Ошибка: Некорректный формат</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='100' y='120' width='95' height='120' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5032/test14.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Ошибка: Некорректный формат</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='red'/><rect x='150' y='115' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+	</table>
+</div><div id="link_c7_p34.1" class="task_block">
+	<div class="check_single">Следующие задачи - одни из самых сложных в изучаемом курсе. При этом они намного ближе к реальной работе, чем все остальные задачи. В предыдущих лабораторных работах вы рассмотрели различные приемы, которые помогут вам сделать код понятнее, нагляднее и проще. Теперь вам нужно применить все эти умения для решения конкретных задач. Возможно вам будет полезен материал главы 34.1 "Боритесь со сложностью" части VII книги "Совершенный код". <a href="Stiv_Makkonnell_-_Sovershenny_kod_2-e_izdanie.pdf#page=836" target="_blank">(открыть в новой вкладке)</a></div>
+</div><div class="task_block" id="task3567">
+	<div class="task_id">3567</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Дан круг с координатами центра cx = 150, cy = 150, r = 50. Исходный файл содержит список действий над ним в формате CSV (<a href="https://ru.wikipedia.org/wiki/CSV" target="_blank">справка в новой вкладке</a>) с разделителем &quot;;&quot;. Каждое действие описывается на отдельной строчке: наименование и необходимые значения. Нужно вывести на экран количество обработанных действий, а также получившиеся координаты и размеры круга. Действия описываются в следующем формате:
+	<ul>
+		<li>Переместить по горизонтали. Наименование shiftX. Значение - целое число, указывает насколько изменится координата круга по оси Х. Ширина круга остается прежней.</li>
+		<li>Переместить по вертикали. Наименование shiftY. Значение - целое число, указывает насколько изменится координата круга по оси Y. Высота круга остается прежней. </li>
+		<li>Изменить ширину. Наименование stretchX. Значение - целое число, указывает насколько изменится ширина круга (dw). При этом координаты центра x, y и радиус изменятся на dw/2.</li>
+		<li>Изменить высоту. Наименование stretchY. Значение - целое число, указывает насколько изменится ширина круга (dw). При этом координаты центра x, y и радиус изменятся на dw/2.</li>
+	</ul><!--{"cx":150,"cy":150,"r":100}--->
+	При попытке совершить некорректное действие, вывести количество корректных действий, сообщение об ошибке и прекратить обработку. Ответ вывести в html-файл. Ответ должен содержать количество действий, описание ошибки и два прямоугольника: красный показывает исходное состояние прямоугольника, черный - последнее корректное состояние.
+	</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='240' cy='250' r='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='200' cy='200' r='150' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='175' cy='175' r='125' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='225' cy='125' r='75' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 3</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='165' cy='165' r='115' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Ошибка: Верхняя точка круга должна иметь неотрицательные координаты</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='170' cy='150' r='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test7.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Ошибка: Левая точка круга должна иметь неотрицательные координаты </p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='140' cy='150' r='90' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test8.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 0</p><p>Ошибка: Ширина должна быть положительной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='150' cy='150' r='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test9.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Ошибка: Ширина должна быть положительной</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='155' cy='155' r='105' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test10.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test11.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 37</p><p>Результат:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='170' cy='186' r='132' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test12.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 2</p><p>Ошибка: Некорректное действие: shitfX</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='210' cy='175' r='125' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test13.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 0</p><p>Ошибка: Некорректный формат</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='150' cy='150' r='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task3567/test14.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Действий: 1</p><p>Ошибка: Некорректный формат</p><p>Последнее корректное состояние:</p>
+<svg width="500" height="350">
+<circle cx='150' cy='150' r='100' fill='transparent' stroke='red'/><circle cx='153' cy='153' r='103' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task5108">
+	<div class="task_id">5108</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Исходный файл содержит список действий в формате CSV (<a href="https://ru.wikipedia.org/wiki/CSV" target="_blank">справка в новой вкладке</a>) с разделителем &quot;;&quot;. Каждое действие описывается на отдельной строчке: наименование и необходимые значения. Действия описываются в следующем формате:
+	<ul>
+		<li>Создать. Наименование create. Значения: id нового прямоугольника, его координаты x, y, ширина и высота.</li>
+		<li>Переместить по горизонтали. Наименование shiftX. Значения: id, изменение Х. Ширина прямоугольника остается прежней.</li>
+		<li>Переместить по вертикали. Наименование shiftY. Значения: id, изменение Y. Высота прямоугольника остается прежней. </li>
+		<li>Изменить ширину. Наименование stretchX. Значения: id, изменение ширины. Координата верхнего-левого угла при этом не меняется.</li>
+		<li>Изменить высоту. Наименование stretchY. Значения: id, изменение высоты. Координата верхнего-левого угла при этом не меняется.</li>
+	</ul>
+	Нужно вывести в HTML файл: идентификатор каждого прямоугольника, количество корректных действий над ним, а также получившиеся фигуры в виде картинки. Порядок вывода информации о прямоугольниках не важен. При попытке совершить некорректное действие, прекратить обработку, вывести последний корректный результат и добавить в файл сообщение об ошибке.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>r2 действий: 1</p><p>r1 действий: 1</p>
+<svg width="500" height="350">
+<rect x='100' y='217' width='100' height='100' fill='transparent' stroke='black'/><rect x='113' y='100' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>r2 действий: 2</p><p>r1 действий: 2</p>
+<svg width="500" height="350">
+<rect x='100' y='217' width='100' height='120' fill='transparent' stroke='black'/><rect x='113' y='100' width='150' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>r2 действий: 1</p><p>r3 действий: 1</p><p>r4 действий: 1</p><p>r1 действий: 1</p>
+<svg width="500" height="350">
+<rect x='0' y='10' width='10' height='10' fill='transparent' stroke='black'/><rect x='0' y='0' width='10' height='10' fill='transparent' stroke='black'/><rect x='10' y='10' width='10' height='10' fill='transparent' stroke='black'/><rect x='10' y='0' width='10' height='10' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Идентификатор не должен повторяться (r1)</p><p>r1 действий: 0</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Операция над неопознанным объектом (r2)</p><p>r1 действий: 4</p>
+<svg width="500" height="350">
+<rect x='120' y='120' width='110' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Координата Y должна быть неотрицательной</p><p>r1 действий: 2</p>
+<svg width="500" height="350">
+<rect x='110' y='80' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test7.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Координата X должна быть неотрицательной</p><p>r1 действий: 11</p>
+<svg width="500" height="350">
+<rect x='10' y='80' width='100' height='120' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test8.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Высота должна быть положительной</p><p>r1 действий: 8</p>
+<svg width="500" height="350">
+<rect x='130' y='120' width='50' height='60' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test9.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Ширина должна быть положительной</p><p>r1 действий: 2</p>
+<svg width="500" height="350">
+<rect x='100' y='120' width='110' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test10.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>r2 действий: 110</p><p>r10 действий: 187</p><p>r3 действий: 119</p><p>r4 действий: 103</p><p>r5 действий: 181</p><p>r6 действий: 163</p><p>r7 действий: 141</p><p>r8 действий: 197</p><p>r9 действий: 184</p><p>r0 действий: 198</p><p>r1 действий: 195</p>
+<svg width="500" height="350">
+<rect x='297' y='170' width='3' height='69' fill='transparent' stroke='black'/><rect x='244' y='201' width='217' height='27' fill='transparent' stroke='black'/><rect x='76' y='161' width='11' height='1' fill='transparent' stroke='black'/><rect x='434' y='186' width='44' height='11' fill='transparent' stroke='black'/><rect x='76' y='144' width='200' height='27' fill='transparent' stroke='black'/><rect x='153' y='1' width='53' height='144' fill='transparent' stroke='black'/><rect x='189' y='86' width='269' height='199' fill='transparent' stroke='black'/><rect x='207' y='54' width='273' height='58' fill='transparent' stroke='black'/><rect x='310' y='4' width='145' height='275' fill='transparent' stroke='black'/><rect x='90' y='235' width='126' height='9' fill='transparent' stroke='black'/><rect x='28' y='87' width='63' height='185' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test11.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Некорректное действие: destroy</p><p>r1 действий: 3</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='80' height='120' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test12.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test13.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted"><p>Ошибка: Некорректный формат</p><p>r1 действий: 0</p>
+<svg width="500" height="350">
+<rect x='100' y='100' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task5108/test14.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Ошибка: Некорректный формат</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task2033">
+	<div class="task_id">2033</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Исходный файл содержит список действий в формате CSV (<a href="https://ru.wikipedia.org/wiki/CSV" target="_blank">справка в новой вкладке</a>) с разделителем &quot;;&quot;. Каждое действие описывается на отдельной строчке: наименование и необходимые значения. Действия описываются в следующем формате:
+	<ul>
+		<li>Создать. Наименование create. Значения: id новой фигуры, ее тип и остальные параметры. Для круга это координаты центра и радиус. Для прямоугольника: координаты верхнего-левого угла, ширина и высота.</li>
+		<li>Переместить по горизонтали. Наименование shiftX. Значения: id, изменение Х.</li>
+		<li>Переместить по вертикали. Наименование shiftY. Значения: id, изменение Y.</li>
+		<li>Изменить ширину. Наименование stretchX. Значения: id, изменение ширины.</li>
+		<li>Изменить высоту. Наименование stretchY. Значения: id, изменение высоты.</li>
+	</ul><!-- действий: {"id":1234, "x":100,"y":100,"w":100,"h":100}--->
+	Нужно вывести на экран: идентификатор каждой фигуры, количество корректных действий над ней, а также получившиеся координаты и размеры. Порядок вывода информации о фигурах не важен. При попытке совершить некорректное действие, вывести сообщение об ошибке и прекратить обработку.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">c1 Действий:1
+r1 Действий:1
+<svg width="500" height="350">
+<circle cx='150' cy='130' r='50' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='150' y='100' width='100' height='100' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">c1 Действий:2
+r1 Действий:2
+<svg width="500" height="350">
+<circle cx='60' cy='210' r='20' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='100' y='100' width='50' height='150' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">c1 Действий:1
+c2 Действий:1
+r1 Действий:1
+<svg width="500" height="350">
+<circle cx='43' cy='43' r='23' stroke='black' stroke-width='1' fill='transparent'/>
+<circle cx='55' cy='55' r='15' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='100' y='10' width='40' height='40' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Операция над неопознанным объектом</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Идентификатор не должен повторяться</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Координата Y должна быть неотрицательной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test7.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Координата X должна быть неотрицательной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test8.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Ширина должна быть положительной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test9.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Высота должна быть положительной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test10.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Левая точка круга должна иметь неотрицательные координаты</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test11.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Верхняя точка круга должна иметь неотрицательные координаты</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test12.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Ширина должна быть положительной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test13.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Высота должна быть положительной</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test14.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">f6 Действий:753
+f7 Действий:785
+f8 Действий:801
+f9 Действий:797
+f0 Действий:809
+f1 Действий:816
+f2 Действий:798
+f3 Действий:789
+f4 Действий:790
+f5 Действий:842
+<svg width="500" height="350">
+<circle cx='287' cy='119' r='119' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='88' y='249' width='327' height='61' fill='transparent' stroke='black'/>
+<circle cx='302' cy='165' r='131' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='3' y='281' width='483' height='47' fill='transparent' stroke='black'/>
+<circle cx='235' cy='228' r='114' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='195' y='82' width='187' height='44' fill='transparent' stroke='black'/>
+<rect x='173' y='184' width='95' height='11' fill='transparent' stroke='black'/>
+<rect x='378' y='135' width='28' height='143' fill='transparent' stroke='black'/>
+<circle cx='152' cy='301' r='38' stroke='black' stroke-width='1' fill='transparent'/>
+<rect x='45' y='189' width='71' height='46' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test15.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Неизвестная фигура</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test16.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Некорректный формат</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test17.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task2033/test18.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Некорректный формат</td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task6981">
+	<div class="task_id">6981</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Исходный файл содержит список действий в формате CSV (<a href="https://ru.wikipedia.org/wiki/CSV" target="_blank">справка в новой вкладке</a>) с разделителем &quot;;&quot;. Каждое действие описывается на отдельной строчке: наименование и необходимые значения. Действия описываются в следующем формате:
+	<ul>
+		<li>Создать. Наименование create. Значения: id новой фигуры, ее тип и остальные параметры. Для круга это координаты центра и радиус. Для прямоугольника: координаты верхнего-левого угла, ширина и высота.</li>
+		<li>Переместить по горизонтали. Наименование shiftX. Значения: id, изменение Х.</li>
+		<li>Переместить по вертикали. Наименование shiftY. Значения: id, изменение Y.</li>
+		<li>Изменить ширину. Наименование stretchX. Значения: id, изменение ширины.</li>
+		<li>Изменить высоту. Наименование stretchY. Значения: id, изменение высоты.</li>
+	</ul>
+	Нужно вывести на экран: идентификатор каждой фигуры, количество корректных действий над ней, а также получившиеся координаты и размеры. Порядок вывода информации о фигурах не важен. При попытке совершить некорректное действие, проигнорировать его и продолжить обработку файла. Вывести количество некорректных действий.</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">id780 Действий:7<br/>id807 Действий:1<br/>id458 Действий:2<br/>id986 Действий:3<br/>id604 Действий:1<br/>id537 Действий:4<br/>id290 Действий:2<br/>id422 Действий:1<br/>id466 Действий:1<br/>id498 Действий:2<br/>Некорректных записей: 8
+<svg width="500" height="350">
+<rect x='106' y='84' width='133' height='22' fill='transparent' stroke='black'/><circle cx='174' cy='174' r='124' stroke='black' stroke-width='1' fill='transparent'/><circle cx='90' cy='90' r='490' stroke='black' stroke-width='1' fill='transparent'/><rect x='82' y='100' width='84' height='100' fill='transparent' stroke='black'/><rect x='100' y='100' width='147' height='100' fill='transparent' stroke='black'/><rect x='54' y='108' width='66' height='70' fill='transparent' stroke='black'/><rect x='100' y='100' width='73' height='103' fill='transparent' stroke='black'/><rect x='100' y='100' width='100' height='86' fill='transparent' stroke='black'/><rect x='100' y='75' width='100' height='100' fill='transparent' stroke='black'/><circle cx='135' cy='135' r='535' stroke='black' stroke-width='1' fill='transparent'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">id671 Действий:5<br/>id397 Действий:9<br/>id979 Действий:3<br/>id645 Действий:1<br/>id722 Действий:2<br/>id280 Действий:3<br/>id945 Действий:4<br/>id798 Действий:4<br/>id534 Действий:1<br/>Некорректных записей: 2
+<svg width="500" height="350">
+<circle cx='104' cy='894' r='76' stroke='black' stroke-width='1' fill='transparent'/><rect x='41' y='123' width='157' height='42' fill='transparent' stroke='black'/><rect x='100' y='110' width='62' height='136' fill='transparent' stroke='black'/><circle cx='200' cy='218' r='100' stroke='black' stroke-width='1' fill='transparent'/><rect x='64' y='100' width='100' height='100' fill='transparent' stroke='black'/><rect x='150' y='75' width='100' height='110' fill='transparent' stroke='black'/><rect x='87' y='100' width='100' height='145' fill='transparent' stroke='black'/><rect x='136' y='100' width='101' height='81' fill='transparent' stroke='black'/><circle cx='113' cy='113' r='113' stroke='black' stroke-width='1' fill='transparent'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">f6 Действий:2445<br/>f7 Действий:2451<br/>f8 Действий:2533<br/>f9 Действий:2528<br/>f0 Действий:2370<br/>f1 Действий:2387<br/>f2 Действий:2519<br/>f3 Действий:2359<br/>f4 Действий:2423<br/>f5 Действий:2534<br/>Некорректных записей: 41884
+<svg width="500" height="350">
+<circle cx='190' cy='252' r='68' stroke='black' stroke-width='1' fill='transparent'/><rect x='228' y='51' width='66' height='228' fill='transparent' stroke='black'/><rect x='219' y='185' width='112' height='88' fill='transparent' stroke='black'/><rect x='85' y='118' width='163' height='104' fill='transparent' stroke='black'/><circle cx='125' cy='134' r='124' stroke='black' stroke-width='1' fill='transparent'/><rect x='106' y='23' width='361' height='53' fill='transparent' stroke='black'/><rect x='21' y='57' width='280' height='89' fill='transparent' stroke='black'/><circle cx='55' cy='98' r='33' stroke='black' stroke-width='1' fill='transparent'/><circle cx='320' cy='96' r='60' stroke='black' stroke-width='1' fill='transparent'/><rect x='273' y='67' width='139' height='162' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">id919 Действий:3<br/>id171 Действий:2<br/>id568 Действий:0<br/>id787 Действий:1<br/>id897 Действий:0<br/>id379 Действий:3<br/>Некорректных записей: 8
+<svg width="500" height="350">
+<rect x='100' y='164' width='10' height='63' fill='transparent' stroke='black'/><rect x='159' y='100' width='100' height='100' fill='transparent' stroke='black'/><circle cx='100' cy='100' r='10' stroke='black' stroke-width='1' fill='transparent'/><rect x='100' y='101' width='10' height='10' fill='transparent' stroke='black'/><circle cx='100' cy='100' r='100' stroke='black' stroke-width='1' fill='transparent'/><rect x='87' y='100' width='100' height='75' fill='transparent' stroke='black'/>
+</svg></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task6981/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">id110 Действий:2<br/>id552 Действий:1<br/>id270 Действий:2<br/>id915 Действий:1<br/>id899 Действий:3<br/>id758 Действий:1<br/>id587 Действий:2<br/>id576 Действий:1<br/>Некорректных записей: 6
+<svg width="500" height="350">
+<rect x='100' y='100' width='41' height='91' fill='transparent' stroke='black'/><circle cx='100' cy='125' r='100' stroke='black' stroke-width='1' fill='transparent'/><rect x='100' y='61' width='143' height='10' fill='transparent' stroke='black'/><circle cx='100' cy='118' r='100' stroke='black' stroke-width='1' fill='transparent'/><rect x='378' y='901' width='139' height='113' fill='transparent' stroke='black'/><rect x='100' y='100' width='100' height='84' fill='transparent' stroke='black'/><rect x='73' y='133' width='100' height='10' fill='transparent' stroke='black'/><circle cx='78' cy='78' r='78' stroke='black' stroke-width='1' fill='transparent'/>
+</svg></td>
+		</tr>
+	</table>
+</div><div class="task_block" id="task1753">
+	<div class="task_id">1753</div>
+    <h3>Задача</h3>
+	<div class="task_desc">Исходный файл содержит информацию о длине дорог между городами. Нужно вывести список маршрутов для междугороднего автобуса, которые можно проложить по этим дорогам. Маршрут начинается в любом городе, проходит через любой другой город и заканчивается в третьем городе. Третий и первый город не должны совпадать. Запись о маршруте оформлять в виде "Гор1 - Гор2 - Гор3 (X км)", где Гор1, Гор2, Гор3 - названия городов, X - суммарная длина маршрута. Маршруты отсортировать по убыванию протяженности. При равной протяженности - по алфавиту</div>
+	<table class="check_values">
+		<tr>
+			<th>Номер теста</th>
+			<th>Содержимое файла</th>
+			<th>Результат</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test1.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Владивосток - Омск - Москва (9000 км}
+Москва - Омск - Владивосток (9000 км}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test2.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Москва - Омск - Новосибирск (3240 км}
+Новосибирск - Омск - Москва (3240 км}
+Владивосток - Новосибирск - Омск (6440 км}
+Омск - Новосибирск - Владивосток (6440 км}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test3.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Караганда - Омск - Новосибирск (1490 км}
+Новосибирск - Омск - Караганда (1490 км}
+Москва - Омск - Новосибирск (3240 км}
+Новосибирск - Омск - Москва (3240 км}
+Караганда - Омск - Москва (3450 км}
+Москва - Омск - Караганда (3450 км}
+Владивосток - Новосибирск - Омск (6440 км}
+Омск - Новосибирск - Владивосток (6440 км}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test4.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Тюмень - Курган - Челябинск (470 км}
+Челябинск - Курган - Тюмень (470 км}
+Челябинск - Екатеринбург - Челябинск (480 км}
+Челябинск - Курган - Челябинск (480 км}
+Екатеринбург - Тюмень - Курган (530 км}
+Курган - Тюмень - Екатеринбург (530 км}
+Тюмень - Екатеринбург - Челябинск (540 км}
+Челябинск - Екатеринбург - Тюмень (540 км}
+Пермь - Екатеринбург - Челябинск (570 км}
+Челябинск - Екатеринбург - Пермь (570 км}
+Екатеринбург - Челябинск - Уфа (630 км}
+Уфа - Челябинск - Екатеринбург (630 км}
+Курган - Челябинск - Уфа (690 км}
+Пермь - Екатеринбург - Тюмень (690 км}
+Тюмень - Екатеринбург - Пермь (690 км}
+Уфа - Челябинск - Курган (690 км}
+Казань - Нижний Новгород - Москва (830 км}
+Курган - Тюмень - Омск (830 км}
+Москва - Нижний Новгород - Казань (830 км}
+Омск - Тюмень - Курган (830 км}
+Курган - Тюмень - Ханты-Мансийск (880 км}
+Ханты-Мансийск - Тюмень - Курган (880 км}
+Пенза - Самара - Уфа (890 км}
+Самара - Уфа - Челябинск (890 км}
+Саратов - Самара - Уфа (890 км}
+Уфа - Самара - Пенза (890 км}
+Уфа - Самара - Саратов (890 км}
+Челябинск - Уфа - Самара (890 км}
+Нижний Новгород - Казань - Уфа (930 км}
+Уфа - Казань - Нижний Новгород (930 км}
+Воронеж - Саратов - Самара (940 км}
+Москва - Воронеж - Москва (940 км}
+Москва - Нижний Новгород - Москва (940 км}
+Самара - Саратов - Воронеж (940 км}
+Казань - Уфа - Челябинск (950 км}
+Челябинск - Уфа - Казань (950 км}
+Екатеринбург - Тюмень - Омск (960 км}
+Омск - Тюмень - Екатеринбург (960 км}
+Казань - Уфа - Самара (1000 км}
+Самара - Уфа - Казань (1000 км}
+Екатеринбург - Тюмень - Ханты-Мансийск (1010 км}
+Ханты-Мансийск - Тюмень - Екатеринбург (1010 км}
+Москва - Воронеж - Саратов (1030 км}
+Саратов - Воронеж - Москва (1030 км}
+Москва - Пенза - Самара (1060 км}
+Самара - Пенза - Москва (1060 км}
+Москва - Нижний Новгород - Москва (1070 км}
+Москва - Пенза - Москва (1070 км}
+Москва - Воронеж - Москва (1150 км}
+Москва - Пенза - Москва (1150 км}
+Новосибирск - Омск - Тюмень (1270 км}
+Тюмень - Омск - Новосибирск (1270 км}
+Омск - Тюмень - Ханты-Мансийск (1310 км}
+Ханты-Мансийск - Тюмень - Омск (1310 км}
+Караганда - Омск - Тюмень (1480 км}
+Тюмень - Омск - Караганда (1480 км}
+Караганда - Омск - Новосибирск (1490 км}
+Новосибирск - Омск - Караганда (1490 км}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test5.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Файл не существует</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test6.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Расстояние должно быть неотрицательно</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test7.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Некорректный формат</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test8.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Недостаточно данных</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="files/task1753/test9.csv" target="_blank">открыть в новой вкладке</a></td>
+			<td class="preformatted">Недостаточно данных</td>
+		</tr>
+	</table>
+</div></body>  </html>
