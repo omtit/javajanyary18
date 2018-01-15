@@ -8,7 +8,10 @@ public class tsak01 {
         System.out.println("Привет!");
         System.out.println("первая\nвторая");
         System.out.println("+---+\n|   |\n|   |\n+---+");
-
+        System.out.println("#\n" +
+                "##\n" +
+                "###\n" +
+                "####");
 
 
 
