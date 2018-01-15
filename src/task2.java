@@ -6,6 +6,9 @@ public class task2 {
         Scanner s = new Scanner(System.in);
         String a = s.nextLine();
         System.out.println("Мы стремимся x"+a);
+
+
+
     }
 
 
