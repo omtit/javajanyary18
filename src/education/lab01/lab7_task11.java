@@ -7,7 +7,7 @@
 * and open the template in the editor.
 
  */
-package Hello.world.app;
+package education.lab01;
 
 import java.util.Scanner;
 
