@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 
 import java.io.File;
+import java.io.IOException;
 
 import static java.lang.reflect.Array.set;
 
 import java.net.URL;
 
 import java.util.Arrays;
+import java.util.Enumeration;
 
 import java.util.HashSet;
 
@@ -155,12 +157,14 @@ public class AccountingTrainTicketsUI extends javax.swing.JFrame {
 
             Logger.getLogger(AccountingTrainTicketsUI.class.getName()).log(Level.SEVERE, null, ex);
 
+        } catch (IOException ex) {
+            Logger.getLogger(AccountingTrainTicketsUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
     }//GEN-LAST:event_referenceMouseEntered
 
-    public static Set<Class<?>> CreateReferencList() throws ClassNotFoundException {
+    public static Set<Class<?>> CreateReferencList() throws ClassNotFoundException, IOException {
 
         //Class cl_;
         //while (cl_.getClassLoader()  {
@@ -182,61 +186,92 @@ public class AccountingTrainTicketsUI extends javax.swing.JFrame {
     }
 
     public static Set<Class<?>> loadClasses(String packageName)
-            throws ClassNotFoundException {
+            throws ClassNotFoundException, IOException {
 
         Set<Class<?>> classes = new HashSet<>();
 
-        URL resource = Thread.currentThread()
+        Enumeration<URL> resource = Thread.currentThread()
                 .getContextClassLoader()
-                .getResource(packageName.replace('.', '/'));
+                .getResources(packageName.replace('.', '/'));
+        //getResource(packageName.replace('.', '/'));
 
-        File directory
-                = new File(resource.getFile());
+        while (resource.hasMoreElements()) {
+            System.out.println(resource.nextElement().toString());
+            File directory
+                    = new File(resource.nextElement().getFile());
 
-        if (!directory.exists()) {
+            if (directory.exists()) {
 
-            System.out.println("That path doesn't exist: " + directory);
+                System.out.println("That path doesn't exist: " + directory);
 
-            return classes;
 
+            SortOutFiles(directory, classes);
+        }
         }
 
-        File[] files = directory.listFiles();
+//        File[] files = directory.listFiles();
+//
+//        if (files == null || files.length == 0) {
+//
+//            return classes;
+//
+//        }
+//
+//        for (File file : files) {
+//
+//            //в другие пакеты уходить ненужно
+//            if (file.isFile() && file.getName().endsWith(".class")) {
+//
+//                classes.add(Class
+//                        .forName(String.format("%s.%s",
+//                                packageName,
+//                                file.getName().substring(0, file.getName().indexOf(".")))));
+//
+//            } else if (file.isDirectory()) {
+//
+//                File[] innerFiles = file.listFiles();
+//                if (innerFiles != null && innerFiles.length != 0) {
+//                    for (File f : innerFiles) {
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
+        return classes;
 
-        if (files == null || files.length == 0) {
+    }
 
-            return classes;
+    public static Set<Class<?>> SortOutFiles(File f_, Set<Class<?>> cl_) throws ClassNotFoundException {
+        File[] files = f_.listFiles();
 
-        }
+        if (files != null && files.length != 0) {
 
-        for (File file : files) {
+            for (File file : files) {
 
-            //в другие пакеты уходить ненужно
-            if (file.isFile() && file.getName().endsWith(".class")) {
+                //в другие пакеты уходить ненужно
+                if (file.isFile() && file.getName().endsWith(".class")) {
 
-                classes.add(Class
-                        .forName(String.format("%s.%s",
-                                packageName,
-                                file.getName().substring(0, file.getName().indexOf(".")))));
+                    cl_.add(Class
+                            .forName(String.format("%s.%s",
+                                    f_.getName(),
+                                    file.getName().substring(0, file.getName().indexOf(".")))));
+                    System.out.println(String.format("%s.%s",
+                            f_.getName(),
+                            file.getName().substring(0, file.getName().indexOf("."))));
 
-            } else if (file.isDirectory()){
-             
-                File[] innerFiles = file.listFiles();
-                if (innerFiles != null && innerFiles.length != 0){
-                for (File f : innerFiles)  {
-                    
-                    
-                    
-                }  
-                    
-                } 
-                
+                } else if (file.isDirectory()) {
+
+                    return SortOutFiles(file, cl_);
+
+                }
+
             }
 
         }
-
-        return classes;
-
+        return cl_;
     }
 
     public static boolean checkAllParents(Class<?> type, Class<?> hasParentType) {
