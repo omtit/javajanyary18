@@ -6,4 +6,13 @@ package railway;
 public class Part {
     City a;
     City b;
+
+    public Part(City a, City b){
+
+        this.a = a;
+        this.b = b;
+
+
+    }
+
 }

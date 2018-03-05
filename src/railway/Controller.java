@@ -8,21 +8,47 @@ import java.util.ArrayList;
 public class Controller {
 
     ArrayList <City> list = new ArrayList<City>();
+    ArrayList <Part> listParts = new ArrayList<Part> ();
 
-    public void addCity{
+    public void addCity(City c){
         //добавить города
+
+        list.add(c);
+
 
     }
 
     public void linkCities(City A, City B){
         //создать связи
+        if (A==B){
+           throw new IllegalArgumentException();
+        }
 
+Part p = new Part(A,B);
+Part p1 = new Part(B,A);
+        listParts.add(p);
+        listParts.add(p1);
 
     }
 
-    public boolean checkLink(City A,City){
+    public boolean checkLink(City A,City B){
         //проверить что для пары городов существует связь
-        return ;
+
+        for (int i=0; i< listParts.size(); i++) {
+
+            if (listParts.get(i).a==A && listParts.get(i).b==B){
+
+                return true;
+
+
+            }
+
+
+
+        }
+
+
+        return false;
     }
 
 }
