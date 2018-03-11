@@ -23,6 +23,10 @@ public class Controller {
         if (A==B){
            throw new IllegalArgumentException();
         }
+       
+        if ((! list.contains(A)) || (! list.contains(B))){        
+            throw new IllegalArgumentException();        
+            }
 
 Part p = new Part(A,B);
 Part p1 = new Part(B,A);
