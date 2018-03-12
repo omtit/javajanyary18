@@ -12,6 +12,10 @@ public class Controller {
 
     public void addCity(City c){
         //добавить города
+City s1 = new City("Москва");
+City s2 = new City("Москва");
+
+
 
         list.add(c);
 
