@@ -12,14 +12,10 @@ public class Controller {
 
     public void addCity(City c){
         //добавить города
-City s1 = new City("Москва");
-City s2 = new City("Москва");
-
-
-
+if (list.contains(c)){   
+    throw new IllegalArgumentException();    
+    }
         list.add(c);
-
-
     }
 
     public void linkCities(City A, City B){

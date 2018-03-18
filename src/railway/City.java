@@ -11,7 +11,17 @@ public class City {
 
     }
 
+ public boolean equals   (Object o){
 
+        if (this==o) return  true;
+        if (o==null || getClass() != o.getClass())
+            return false;
+        City City = (City) o;
+        
+        return  name == City.name;
+
+
+    }
 
 
 
