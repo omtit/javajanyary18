@@ -8,9 +8,20 @@ import java.time.LocalDateTime;
 //train
 public class Trip {
 
-  int number;
+  String number;
   City from;
   City to;
   LocalDateTime date;
+
+  public  Trip (String number,City from,City to, LocalDateTime date){
+
+    this.number = number;
+    this.from = from;
+    this.to = to;
+    this.date = date;
+
+
+  }
+
 
 }

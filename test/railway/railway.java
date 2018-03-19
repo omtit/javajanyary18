@@ -3,6 +3,7 @@ package railway;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -78,6 +79,45 @@ public class railway {
         }
 
         Assert.assertTrue(cat);
+
+
+    }
+
+    @Test
+    public void testCreatTrip() {
+
+        Controller с = new Controller();
+        String tNumber = "РТ-1500";
+        City NVS = new City("Новосибирск");
+        City OMS = new City("Омск");
+        String tDate = "19:27:00 19.03.2018";
+        с.creatTrip(tNumber, NVS, OMS, tDate);
+
+
+    }
+
+    @Test
+    public void checkTripEsterday(){
+        boolean cat = false;
+        Controller с = new Controller();
+        String tNumber = "РТ-1500";
+        City NVS = new City("Новосибирск");
+        City OMS = new City("Омск");
+        String tDate = "19:27:00 18.03.2018";
+
+        try {
+
+            с.creatTrip(tNumber, NVS, OMS, tDate);
+        }catch(IllegalArgumentException e) {
+
+            cat = true;
+            System.out.println(e.getMessage());
+        }
+
+        Assert.assertTrue(cat);
+
+
+
 
 
     }

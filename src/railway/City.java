@@ -18,7 +18,7 @@ public class City {
             return false;
         City City = (City) o;
         
-        return  name == City.name;
+        return  name.equals(City.name);
 
 
     }
