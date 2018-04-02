@@ -11,6 +11,7 @@ public class Controller {
 
     ArrayList<City> list = new ArrayList<City>();
     ArrayList<Part> listParts = new ArrayList<Part>();
+    ArrayList<Trip> listTips = new ArrayList<>();
 
     public void addCity(City c) {
         //добавить города
@@ -62,6 +63,7 @@ public class Controller {
         DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime datDepart = LocalDateTime.parse(depurtureDateTime,f);
         LocalDateTime current = LocalDateTime.now();
+        Trip nextTrip;
 
         if (current.isAfter(datDepart)){
 
@@ -69,13 +71,21 @@ public class Controller {
 
         }
 
+        nextTrip = new Trip(tripNumber,From_,To_,datDepart);
 
-        return   new Trip(tripNumber,From_,To_,datDepart);
+        listTips.add(nextTrip);
 
-
+        return   nextTrip;
 
     }
 
-
+    public Stop creatStop (String arriveDate,Trip relateTrip,City arriveCity ) {
+        String pattern = "HH:mm:ss dd.MM.yyyy";
+        DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime datArr = LocalDateTime.parse(arriveDate, f);
+        Stop nextStop;
+        nextStop = new  Stop(datArr,relateTrip,arriveCity);
+        return nextStop;
+    }
 
 }
