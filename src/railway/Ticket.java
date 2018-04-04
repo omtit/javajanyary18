@@ -9,5 +9,7 @@ public class Ticket {
     City from;
     City to;
     LocalDateTime date;
+    Seat seat;
+    Carriage carriag;
     String ferst_name;
 }

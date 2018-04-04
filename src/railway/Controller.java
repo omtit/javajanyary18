@@ -3,6 +3,7 @@ package railway;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by pro-27 on 26.02.2018.
@@ -11,7 +12,9 @@ public class Controller {
 
     ArrayList<City> list = new ArrayList<City>();
     ArrayList<Part> listParts = new ArrayList<Part>();
-    ArrayList<Trip> listTips = new ArrayList<>();
+    HashSet SetTrips = new HashSet();
+    HashSet SetStops = new HashSet();
+  
 
     public void addCity(City c) {
         //добавить города
@@ -73,7 +76,7 @@ public class Controller {
 
         nextTrip = new Trip(tripNumber,From_,To_,datDepart);
 
-        listTips.add(nextTrip);
+        SetTrips.add(nextTrip);
 
         return   nextTrip;
 
@@ -85,7 +88,17 @@ public class Controller {
         LocalDateTime datArr = LocalDateTime.parse(arriveDate, f);
         Stop nextStop;
         nextStop = new  Stop(datArr,relateTrip,arriveCity);
+        
+        SetStops.add(nextStop);
+        
         return nextStop;
+    }
+    
+    public HashSet saleTickets(City from,City to,String date){
+    
+    
+        return 
+        
     }
 
 }

@@ -37,13 +37,12 @@ public class Trip {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Trip  = (Stop) o;
+    Trip  trip = (Trip) o;
 
-    if (number !=null ? )
-
-            (date != null ? !date.equals(stop.date) : stop.date != null) return false;
-    if (trip != null ? !trip.equals(stop.trip) : stop.trip != null) return false;
-    return city != null ? city.equals(stop.city) : stop.city == null;
+    if (number !=null ? !number.equals(trip.number) : trip.number!=null) return false;
+    if (from != null ? !from.equals(trip.from) : trip.from != null) return false;
+    if (to != null ? !to.equals(trip.to) : trip.to != null) return false;
+    return date != null ? date.equals(trip.date) : trip.date == null;
   }
 
 }
