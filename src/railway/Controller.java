@@ -95,6 +95,8 @@ public class Controller {
     }
     
     public HashSet saleTickets(City from,City to,String date){
+        SetStops.
+        
     
     
         return 
