@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by pro-27 on 26.02.2018.
@@ -12,8 +15,8 @@ public class Controller {
 
     ArrayList<City> list = new ArrayList<City>();
     ArrayList<Part> listParts = new ArrayList<Part>();
-    HashSet SetTrips = new HashSet();
-    HashSet SetStops = new HashSet();
+    HashSet<Trip> SetTrips = new HashSet();
+    HashSet<Stop> SetStops = new HashSet();
   
 
     public void addCity(City c) {
@@ -94,11 +97,16 @@ public class Controller {
         return nextStop;
     }
     
-    public HashSet saleTickets(City from,City to,String date){
-        SetStops.
+    public HashSet<Ticket> saleTickets(City from,City to,String date){
+        String pattern = "HH:mm:ss dd.MM.yyyy";
+        DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime date_ = LocalDateTime.parse(date, f);   
         
-    
-    
+        
+    List<Stop> ApropriatStops = (List<Stop>) SetStops.stream().filter(s -> (s.city.equals(from) || s.city.equals(to)) && s.date.compareTo(date_)>=0).collect(Collectors.toList());
+    Map<Trip,List<Stop>> stopsByTrip = ApropriatStops.stream().collect((Collectors.groupingBy(s -> s.trip)));
+    stopsByTrip.        
+            
         return 
         
     }
