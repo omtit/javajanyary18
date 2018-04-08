@@ -3,9 +3,11 @@ package railway;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
@@ -17,7 +19,6 @@ public class Controller {
     ArrayList<Part> listParts = new ArrayList<Part>();
     HashSet<Trip> SetTrips = new HashSet();
     HashSet<Stop> SetStops = new HashSet();
-  
 
     public void addCity(City c) {
         //добавить города
@@ -53,62 +54,96 @@ public class Controller {
 
                 return true;
 
-
             }
 
-
         }
-
 
         return false;
     }
 
-    public Trip creatTrip (String tripNumber, City From_, City To_, String depurtureDateTime){
+    public Trip creatTrip(String tripNumber, City From_, City To_, String depurtureDateTime) {
 
         String pattern = "HH:mm:ss dd.MM.yyyy";
         DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime datDepart = LocalDateTime.parse(depurtureDateTime,f);
+        LocalDateTime datDepart = LocalDateTime.parse(depurtureDateTime, f);
         LocalDateTime current = LocalDateTime.now();
         Trip nextTrip;
 
-        if (current.isAfter(datDepart)){
+        if (current.isAfter(datDepart)) {
 
-          throw new IllegalArgumentException("Дата поездки должна быть в будующем");
+            throw new IllegalArgumentException("Дата поездки должна быть в будующем");
 
         }
 
-        nextTrip = new Trip(tripNumber,From_,To_,datDepart);
+        nextTrip = new Trip(tripNumber, From_, To_, datDepart);
 
         SetTrips.add(nextTrip);
 
-        return   nextTrip;
+        return nextTrip;
 
     }
 
-    public Stop creatStop (String arriveDate,Trip relateTrip,City arriveCity ) {
+    public Stop creatStop(String arriveDate, Trip relateTrip, City arriveCity) {
         String pattern = "HH:mm:ss dd.MM.yyyy";
         DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime datArr = LocalDateTime.parse(arriveDate, f);
         Stop nextStop;
-        nextStop = new  Stop(datArr,relateTrip,arriveCity);
-        
+        nextStop = new Stop(datArr, relateTrip, arriveCity);
+
         SetStops.add(nextStop);
-        
+
         return nextStop;
     }
-    
-    public HashSet<Ticket> saleTickets(City from,City to,String date){
+
+    public HashSet<Ticket> saleTickets(City from, City to, String date) {
         String pattern = "HH:mm:ss dd.MM.yyyy";
         DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime date_ = LocalDateTime.parse(date, f);   
-        
-        
-    List<Stop> ApropriatStops = (List<Stop>) SetStops.stream().filter(s -> (s.city.equals(from) || s.city.equals(to)) && s.date.compareTo(date_)>=0).collect(Collectors.toList());
-    Map<Trip,List<Stop>> stopsByTrip = ApropriatStops.stream().collect((Collectors.groupingBy(s -> s.trip)));
-    stopsByTrip.        
-            
-        return 
-        
+        LocalDateTime date_ = LocalDateTime.parse(date, f);
+        ComparatorStops c_ = new ComparatorStops();
+        HashSet<Ticket> tickets = new HashSet();
+
+        List<Stop> ApropriatStops = (List<Stop>) SetStops.stream().filter(s -> (s.city.equals(from) || s.city.equals(to)) && s.date.compareTo(date_) >= 0).collect(Collectors.toList());
+        Map<Trip, List<Stop>> stopsByTrip = ApropriatStops.stream().collect((Collectors.groupingBy(s -> s.trip)));
+        stopsByTrip.forEach((k, v) -> {
+            if (v.size() > 1) {
+                v.sort(c_);
+//    v.forEach(i->{
+//        
+//      
+//      if(i.city.equals(from)){
+//          
+//      cityFrom = i.city;
+//      
+//          
+//      }else{
+//       cityTo = i.city;   
+//          
+//      }   
+//    });
+                Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
+                tickets.add(t_);
+
+            }
+
+        });
+
+        return tickets;
+
     }
 
 }
+
+//public class ComparatorStops implements Comparator<Stop> {
+//    
+//    @Override
+//    public int compare(Stop s1, Stop s2) {
+//        if(s1.date.compareTo(s2.date) > 0){
+//            return 1;
+//        } else if (s1.date.compareTo(s2.date) < 0) {
+//            return -1;
+//        } else {
+//            return 0;
+//        }
+//    }
+//    
+//}
