@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ public class Controller {
     ArrayList<Part> listParts = new ArrayList<Part>();
     HashSet<Trip> SetTrips = new HashSet();
     HashSet<Stop> SetStops = new HashSet();
+    HashSet<Carriage> SetCarriage = new HashSet();
+    Map<String, List<Seat>> MapSeats = new HashMap();
 
     public void addCity(City c) {
         //добавить города
@@ -94,6 +97,13 @@ public class Controller {
 
         return nextStop;
     }
+    
+    public Carriage creatCarriage(Trip reletedTrip,String carriagtype,int carriagNumber){
+     List ApropriatSeats = MapSeats.get(carriagtype);
+     Carriage carr = new Carriage(ApropriatSeats,reletedTrip,carriagtype,carriagNumber);   
+     SetCarriage.add(carr);
+     return carr;    
+    }
 
     public HashSet<Ticket> saleTickets(City from, City to, String date) {
         String pattern = "HH:mm:ss dd.MM.yyyy";
@@ -120,6 +130,10 @@ public class Controller {
 //          
 //      }   
 //    });
+
+List<Carriage> linkedCarr = SetCarriage.stream().filter(crr->crr.trip.equals(k)).collect(Collectors.toList());
+
+
                 Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
                 tickets.add(t_);
 
