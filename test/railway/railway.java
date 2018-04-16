@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by pro-27 on 26.02.2018.
@@ -117,6 +118,19 @@ public class railway {
         Assert.assertTrue(cat);
 
 
+
+
+
+    }
+
+    @Test
+    public  void  testConnection() throws ClassNotFoundException {
+
+        DataMapper onesMapper = new DataMapper();
+
+       HashSet s=onesMapper.loadCities();
+
+       Assert.assertNotEquals(0,s.size());
 
 
 

@@ -134,8 +134,8 @@ public class Controller {
 List<Carriage> linkedCarr = SetCarriage.stream().filter(crr->crr.trip.equals(k)).collect(Collectors.toList());
 
 
-                Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
-                tickets.add(t_);
+//                Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
+//                tickets.add(t_);
 
             }
 
