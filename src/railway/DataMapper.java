@@ -1,7 +1,11 @@
 package railway;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by pro-27 on 16.04.2018.
@@ -18,15 +22,15 @@ public class DataMapper {
         try {
             Connection connection = DriverManager.getConnection(address, "postgres", "123");
             Statement statement = connection.createStatement();
-            String query="Select name From cities;";
+            String query = "Select name From cities;";
             ResultSet result = statement.executeQuery(query);
 
-            while(result.next()){
+            while (result.next()) {
 
-             String name = result.getString("name");
+                String name = result.getString("name");
 
-             City city = new City(name);
-             Cities.add(city);
+                City city = new City(name);
+                Cities.add(city);
 
             }
 
@@ -37,14 +41,11 @@ public class DataMapper {
 
         }
 
-
         return Cities;
-
 
     }
 
-
-    public HashSet<Trip> loadTrip() throws ClassNotFoundException{
+    public HashSet<Trip> loadTrip() throws ClassNotFoundException {
 
         HashSet<Trip> trips = new HashSet<>();
 
@@ -54,16 +55,26 @@ public class DataMapper {
         try {
             Connection connection = DriverManager.getConnection(address, "postgres", "123");
             Statement statement = connection.createStatement();
-            String query="Select ID,number,city_from,city_to,departure_date,foreign From trips;";
+            String query = "Select ID,number,city_from,city_to,departure_date,foreign From trips;";
             ResultSet result = statement.executeQuery(query);
 
-            while(result.next()){
+            while (result.next()) {
 
-                String id = result.getInt("ID");
+                int id = result.getInt("ID");
                 String namber = result.getString("number");
-                City cityFrom = result.getString("city_from");
-
-
+                String cityFrom = result.getString("city_from");
+                String cityTo = result.getString("city_to");
+                Date DipDate = result.getDate("departure_date");
+                
+                
+                City cityFromLink = loadCities().stream().filter(c -> c.name == cityFrom).collect(Collectors.toList()).get(0);
+                City cityToLink = loadCities().stream().filter(c -> c.name == cityTo).collect(Collectors.toList()).get(0);
+                String pattern = "HH:mm:ss dd.MM.yyyy";
+                DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
+                LocalDateTime date_ = LocalDateTime.parse(date, f);
+                
+                
+                
                 City city = new City(name);
                 trips.add(city);
 
@@ -76,16 +87,8 @@ public class DataMapper {
 
         }
 
-
         return Cities;
 
-
-
-
     }
-
-
-
-
 
 }
