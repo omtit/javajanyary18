@@ -1,6 +1,7 @@
 package railway;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -64,7 +65,7 @@ public class DataMapper {
                 String namber = result.getString("number");
                 String cityFrom = result.getString("city_from");
                 String cityTo = result.getString("city_to");
-                Date DipDate = result.getDate("departure_date");
+                Date DipDate = result.getDate("departure_date").;
                 
                 
                 City cityFromLink = loadCities().stream().filter(c -> c.name == cityFrom).collect(Collectors.toList()).get(0);
