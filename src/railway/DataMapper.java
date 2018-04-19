@@ -3,6 +3,7 @@ package railway;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
@@ -65,19 +66,18 @@ public class DataMapper {
                 String namber = result.getString("number");
                 String cityFrom = result.getString("city_from");
                 String cityTo = result.getString("city_to");
-                Date DipDate = result.getDate("departure_date").;
-                
-                
+                LocalDate DipDate = result.getDate("departure_date").toLocalDate();
+                LocalTime DipTime = result.getTime("departure_date").toLocalTime();
+                LocalDateTime DipDatTime = LocalDateTime.of(DipDate, DipTime);
+
                 City cityFromLink = loadCities().stream().filter(c -> c.name == cityFrom).collect(Collectors.toList()).get(0);
                 City cityToLink = loadCities().stream().filter(c -> c.name == cityTo).collect(Collectors.toList()).get(0);
-                String pattern = "HH:mm:ss dd.MM.yyyy";
-                DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
-                LocalDateTime date_ = LocalDateTime.parse(date, f);
-                
-                
-                
-                City city = new City(name);
-                trips.add(city);
+//                String pattern = "HH:mm:ss dd.MM.yyyy";
+//                DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
+//                LocalDateTime date_ = LocalDateTime.parse(DipDate, f);
+
+                Trip trip = new Trip(namber, cityFromLink, cityToLink, DipDatTime);
+                trips.add(trip);
 
             }
 
@@ -88,7 +88,7 @@ public class DataMapper {
 
         }
 
-        return Cities;
+        return trips;
 
     }
 

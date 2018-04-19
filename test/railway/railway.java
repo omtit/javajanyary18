@@ -129,12 +129,12 @@ public class railway {
         DataMapper onesMapper = new DataMapper();
 
        HashSet s=onesMapper.loadCities();
+       
+       HashSet<Trip> t = onesMapper.loadTrip(); 
 
        Assert.assertNotEquals(0,s.size());
 
 
-
-    }
-
-
+    } 
+    
 }
