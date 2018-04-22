@@ -22,6 +22,7 @@ public class Controller {
     HashSet<Stop> SetStops = new HashSet();
     HashSet<Carriage> SetCarriage = new HashSet();
     Map<String, List<Seat>> MapSeats = new HashMap();
+    Map<Ticket,List<Stop>> MapBooking = new HashMap();
 
     public void addCity(City c) {
         //добавить города
@@ -132,10 +133,30 @@ public class Controller {
 //    });
 
 List<Carriage> linkedCarr = SetCarriage.stream().filter(crr->crr.trip.equals(k)).collect(Collectors.toList());
+linkedCarr.forEach(crr->{
+    crr.setSeats.forEach(st->{
+        
+  MapBooking.entrySet().stream().filter(bk->bk.getKey().carriag.equals(crr) && bk.getKey().seat.equals(st) && (bk.getValue().stream().sorted(c_).
+          filter(stp->stp.equals(v.get(0)) || stp.equals(v.get(1) || v.get(1).date.compareTo(stp.date)< ) )
+  
+  
+
+if(crr.){
+    
+    
+    
+    
+}
+    }
 
 
-//                Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
-//                tickets.add(t_);
+
+);
+
+
+
+Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
+ tickets.add(t_);
 
             }
 

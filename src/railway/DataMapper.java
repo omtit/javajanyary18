@@ -70,8 +70,8 @@ public class DataMapper {
                 LocalTime DipTime = result.getTime("departure_date").toLocalTime();
                 LocalDateTime DipDatTime = LocalDateTime.of(DipDate, DipTime);
 
-                City cityFromLink = loadCities().stream().filter(c -> c.name == cityFrom).collect(Collectors.toList()).get(0);
-                City cityToLink = loadCities().stream().filter(c -> c.name == cityTo).collect(Collectors.toList()).get(0);
+                City cityFromLink = loadCities().stream().filter(c -> (c.name == null ? cityFrom == null : c.name.equals(cityFrom))).collect(Collectors.toList()).isEmpty()? new City(cityFrom):loadCities().stream().filter(c -> (c.name == null ? cityFrom == null : c.name.equals(cityFrom))).collect(Collectors.toList()).get(0);
+                City cityToLink = loadCities().stream().filter(c -> (c.name == null ? cityTo == null : c.name.equals(cityTo))).collect(Collectors.toList()).isEmpty()?new City(cityFrom):loadCities().stream().filter(c -> (c.name == null ? cityTo == null : c.name.equals(cityTo))).collect(Collectors.toList()).get(0);
 //                String pattern = "HH:mm:ss dd.MM.yyyy";
 //                DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
 //                LocalDateTime date_ = LocalDateTime.parse(DipDate, f);
