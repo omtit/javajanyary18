@@ -22,6 +22,10 @@ public class Stop {
         return matchesByCity && matchesByDate;
     }
 
+    public boolean someCondition(){
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

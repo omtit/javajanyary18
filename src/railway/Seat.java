@@ -6,4 +6,8 @@ package railway;
 public class Seat {
     String type;
     int number;
+
+    public boolean isBookedBy(BookedTicket t){
+        return t.getTicket().seat.equals(this);
+    }
 }

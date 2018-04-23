@@ -3,12 +3,10 @@ package railway;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +20,8 @@ public class Controller {
     HashSet<Stop> SetStops = new HashSet();
     HashSet<Carriage> SetCarriage = new HashSet();
     Map<String, List<Seat>> MapSeats = new HashMap();
-    Map<Ticket,List<Stop>> MapBooking = new HashMap();
+    Map<Ticket, List<Stop>> MapBooking = new HashMap();
+    List<BookedTicket> bookedTickets = new ArrayList<>();
 
     public void addCity(City c) {
         //добавить города
@@ -98,12 +97,12 @@ public class Controller {
 
         return nextStop;
     }
-    
-    public Carriage creatCarriage(Trip reletedTrip,String carriagtype,int carriagNumber){
-     List ApropriatSeats = MapSeats.get(carriagtype);
-     Carriage carr = new Carriage(ApropriatSeats,reletedTrip,carriagtype,carriagNumber);   
-     SetCarriage.add(carr);
-     return carr;    
+
+    public Carriage creatCarriage(Trip reletedTrip, String carriagtype, int carriagNumber) {
+        List ApropriatSeats = MapSeats.get(carriagtype);
+        Carriage carr = new Carriage(ApropriatSeats, reletedTrip, carriagtype, carriagNumber);
+        SetCarriage.add(carr);
+        return carr;
     }
 
     public HashSet<Ticket> saleTickets(City from, City to, String date) {
@@ -118,48 +117,31 @@ public class Controller {
                 .filter(s -> s.matches(from, to, requiredDate))
                 .collect((Collectors.groupingBy(s -> s.trip)));
 
-        stopsByTrip.forEach((k, v) -> {
-            if (v.size() > 1) {
-                v.sort(c_);
-//    v.forEach(i->{
-//        
-//      
-//      if(i.city.equals(from)){
-//          
-//      cityFrom = i.city;
-//      
-//          
-//      }else{
-//       cityTo = i.city;   
-//          
-//      }   
-//    });
+        stopsByTrip.forEach((trip, stopList) -> {
+            if (stopList.size() > 1) {
+                stopList.sort(byDate);
+            }
+            Stop stopFrom = stopList.get(0);
+            Stop stopTo = stopList.get(1);
+            List<Carriage> linkedCarr = SetCarriage
+                    .stream()
+                    .filter(crr -> crr.trip.equals(trip))
+                    .collect(Collectors.toList());
 
-List<Carriage> linkedCarr = SetCarriage.stream().filter(crr->crr.trip.equals(k)).collect(Collectors.toList());
-linkedCarr.forEach(crr->{
-    crr.setSeats.forEach(st->{
-        
-  MapBooking.entrySet().stream().filter(bk->bk.getKey().carriag.equals(crr) && bk.getKey().seat.equals(st) && (bk.getValue().stream().sorted(c_).
-          filter(stp->stp.equals(v.get(0)) || stp.equals(v.get(1) || v.get(1).date.compareTo(stp.date)< ) )
-  
-  
+            List<BookedTicket> linkedBookedTickets = bookedTickets.stream()
+                    .filter(ticket -> ticket.getTicket().trip.equals(trip))
+                    .collect(Collectors.toList());
 
-if(crr.){
-    
-    
-    
-    
-}
-    }
+            linkedCarr.forEach(crr -> {
+                crr.setSeats.stream().filter(seat ->
+                    linkedBookedTickets.stream()
+                        .noneMatch(ticket -> ticket.assignedTo(crr) && seat.isBookedBy(ticket))
+
+                );
 
 
-
-);
-
-
-
-Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
- tickets.add(t_);
+                Ticket t_ = new Ticket(k, v.get(0).city, v.get(1).city, v.get(0).date, new Seat(), new Carriage(), "Петя");
+                tickets.add(t_);
 
             }
 
