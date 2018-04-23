@@ -109,12 +109,15 @@ public class Controller {
     public HashSet<Ticket> saleTickets(City from, City to, String date) {
         String pattern = "HH:mm:ss dd.MM.yyyy";
         DateTimeFormatter f = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime date_ = LocalDateTime.parse(date, f);
-        ComparatorStops c_ = new ComparatorStops();
+        LocalDateTime requiredDate = LocalDateTime.parse(date, f);
+        ComparatorStops byDate = new ComparatorStops();
         HashSet<Ticket> tickets = new HashSet();
 
-        List<Stop> ApropriatStops = (List<Stop>) SetStops.stream().filter(s -> (s.city.equals(from) || s.city.equals(to)) && s.date.compareTo(date_) >= 0).collect(Collectors.toList());
-        Map<Trip, List<Stop>> stopsByTrip = ApropriatStops.stream().collect((Collectors.groupingBy(s -> s.trip)));
+        Map<Trip, List<Stop>> stopsByTrip = SetStops
+                .stream()
+                .filter(s -> s.matches(from, to, requiredDate))
+                .collect((Collectors.groupingBy(s -> s.trip)));
+
         stopsByTrip.forEach((k, v) -> {
             if (v.size() > 1) {
                 v.sort(c_);

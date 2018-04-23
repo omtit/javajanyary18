@@ -14,7 +14,12 @@ public class Stop {
        this.date = d_;
        this.trip = t_;
        this.city = c_;
+    }
 
+    public boolean matches(City from, City to, LocalDateTime requiredDate){
+        boolean matchesByCity = this.city.equals(from) || this.city.equals(to);
+        boolean matchesByDate = !date.isBefore(requiredDate);
+        return matchesByCity && matchesByDate;
     }
 
     @Override
